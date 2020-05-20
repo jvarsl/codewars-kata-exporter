@@ -12,6 +12,11 @@ with open('./source.html') as fin:
 base_dir = setup['download_folder']
 extensions = setup['file_extensions']
 
+def trimPath(value, deletechars = '\/:*?"<>|'):
+    for c in deletechars:
+        value = value.replace(c,'')
+    return value
+
 parser = KataParser(file)
 katas = parser.parse_katas()
 api = CodeWarsApi(setup['codewars']['api_key'])
@@ -23,7 +28,7 @@ for i, kata in enumerate(katas):
     kata_description = api.get_kata_description(kata.kata_id)
 
     for language, source_code in zip(kata.languages, kata.source_codes):
-        file_dir = os.path.join(base_dir, kata.difficulty, kata.title, language)
+        file_dir = os.path.join(base_dir, kata.difficulty, trimPath(kata.title), language)
         if not os.path.exists(file_dir):
             os.makedirs(file_dir)
 
