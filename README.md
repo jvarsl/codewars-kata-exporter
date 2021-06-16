@@ -46,6 +46,8 @@ First off, you need to have [Python 3](https://www.python.org/download/releases/
 
 To use Selenium you need to install a webdriver to interface with a specific browser. The browser I have chosen to use in the script was Chrome, thus you can download it [here](https://sites.google.com/a/chromium.org/chromedriver/downloads).
 
+Place chromedriver.exe file in the same folder as fetch_source.py and enable WebGL in chrome://flags/.
+
 ___
 ## How to run
 

@@ -13,7 +13,9 @@
     "c++": ".cpp",
     "c#": ".cs",
     "php": ".php",
-    "ruby": ".rb"
+    "ruby": ".rb",
+    "sql": ".sql",
+    "typescript": ".ts"
   },
   "reloads_in_browser": 100
 }

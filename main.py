@@ -12,7 +12,7 @@ with open('./source.html') as fin:
 base_dir = setup['download_folder']
 extensions = setup['file_extensions']
 
-def trimPath(value, deletechars = '\/:*?"<>|'):
+def trimPath(value, deletechars = '\/:.!*?"<>|'):
     for c in deletechars:
         value = value.replace(c,'')
     return value
@@ -33,8 +33,8 @@ for i, kata in enumerate(katas):
             os.makedirs(file_dir)
 
         filename = 'solution' + extensions.get(language, '')
-        with open(os.path.join(file_dir, filename), 'w') as fout:
+        with open(os.path.join(file_dir, filename), 'w', encoding="utf-8") as fout:
             fout.write(source_code)
 
-        with open(os.path.join(file_dir, 'README.md'), 'w') as fout:
+        with open(os.path.join(file_dir, 'README.md'), 'w', encoding="utf-8") as fout:
             fout.write(kata_description)

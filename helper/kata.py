@@ -34,7 +34,7 @@ class Kata:
 class KataParser:
     def __init__(self, html):
         soup = BeautifulSoup(html, 'html.parser')
-        self.elems = soup.find_all('div', {'class': 'list-item solutions'})
+        self.elems = soup.find_all('div', {'class': 'list-item-solutions'})
 
     def parse_katas(self):
         return [Kata(elem) for elem in self.elems]

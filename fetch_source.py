@@ -18,7 +18,7 @@ passwordElem = driver.find_element_by_id("user_password")
 usernameElem.send_keys(setup['codewars']['email'])
 passwordElem.send_keys(setup['codewars']['password'])
 
-driver.find_element_by_xpath("//button[1]").click()
+driver.find_element_by_xpath("//button[2]").click()
 driver.find_element_by_xpath("//div[@class='profile-pic mr-0']/img[1]").click()
 WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.LINK_TEXT, "Solutions")))
 driver.find_element_by_link_text('Solutions').click()
