@@ -1,11 +1,10 @@
 # Codewars Kata Exporter
 
+creator https://github.com/lucasbflopes/codewars-kata-exporter
 ___
 ## General Information
 
-This script, although too much 'hacky' for my taste, was the best solution I came up with to export all my kata solutions from codewars to a file structure in my hard drive in an automated fashion.
-
-It relies on the [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/) module to parse the kata solutions from raw HTML, and also uses the very limited [Codewars API](https://dev.codewars.com) to get each kata description.
+This script relies on the [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/) module to parse the kata solutions from raw HTML, and also uses the very limited [Codewars API](https://dev.codewars.com) to get each kata description.
 
 Since the solutions in the solution's page are dynamically generated, it is necessary to keep scrolling down in order to be able to collect all of them. This task was facilitated by using [Selenium](http://selenium-python.readthedocs.io) to emulate this repetitive work for you.
 
@@ -40,16 +39,16 @@ solutions/
 ___
 ## How to install
 
-First off, you need to have [Python 3](https://www.python.org/download/releases/3.0/) installed in your machine. Then install all python dependencies required:
+First off, you need to have [Python 3](https://www.python.org/downloads/) installed in your machine. Then install all python dependencies required:
 
-`$ pip3 install -r requirements.txt`
+`pip install -r requirements.txt`
 
-To use Selenium you need to install a webdriver to interface with a specific browser. The browser I have chosen to use in the script was Chrome, thus you can download it [here](https://sites.google.com/a/chromium.org/chromedriver/downloads).
-
-Place chromedriver.exe file in the same folder as fetch_source.py and enable WebGL in chrome://flags/.
+To use Selenium you need to place chromedriver.exe file in the same folder as fetch_source.py and enable WebGL in chrome://flags/. The browser used in this script was Chrome, thus you can download it [here](https://sites.google.com/a/chromium.org/chromedriver/downloads).
 
 ___
 ## How to run
+
+#### Step 1 
 
 Before executing the script, it is necessary to fill some information in `setup.json`:
 
@@ -58,7 +57,7 @@ Before executing the script, it is necessary to fill some information in `setup.
   "codewars": {
     "email": "foo@bar.com",   <------------ Your login email
     "password": "foo123",     <------------ Your login password
-    "api_key": "foofoo"       <------------ Codewars API token. Can be found under your account settings
+    "api_key": "foofoo"       <------------ Necessary! Codewars API token. Found under your account settings
   },
   "download_folder": "./solutions", <------ Root directory wherein the katas will be placed
   "file_extensions": {              <------ The parser only finds the text, so in order to save a file
@@ -74,13 +73,18 @@ Before executing the script, it is necessary to fill some information in `setup.
   },
   "reloads_in_browser": 100   <------------ # of attempts to reload the page while scrolling down. Each
 }                                           attempt takes 2s, which is the time I deemed enough to load
-                                            more katas. This is 'hacky' part I mentioned about. Feel free
-                                            to fine-tune this value to suit you best
+                                            more katas. Use this value to get latest katas by limiting
+                                            the amount (~15 katas per 1 reload).
 ```
+
+
+#### Step 2
+
+***OBS**: You can skip this step altogether if you prefer to download the HTML source manually. That being the case, it is not necessary to fill both `email` and `password` in `setup.json`.*
 
 Now run the script responsible for fetching the HTML:
 
-`$ python fetch_source.py`
+`py fetch_source.py`
 
 A chrome window will open and then will start to automatically:
 1. log into your account;
@@ -89,10 +93,10 @@ A chrome window will open and then will start to automatically:
 
 After finishing, the script will save the HTML in `./source.html`
 
-***OBS**: You can skip this step altogether if you prefer to download the HTML source manually. That being the case, it is not necessary to fill both `email` and `password` in `setup.json`.*
+#### Step 3
 
 Lastly, run the script responsible for parsing the HTML and creating the file structure:
 
-`$ python main.py`
+`py main.py`
 
 Done! 
