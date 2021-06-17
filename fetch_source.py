@@ -6,7 +6,6 @@ from selenium.webdriver.support import expected_conditions as EC
 import json
 import time
 from helper.api import CodeWarsApi
-from helper.kata import KataParser
 
 with open('./setup.json') as fin:
     setup = json.load(fin)

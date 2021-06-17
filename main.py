@@ -26,8 +26,9 @@ print('Exporting katas...')
 for i, kata in enumerate(katas):
     print('\r{}/{} katas exported.'.format(i+1, len(katas)), end='')
 
-    kata_description = api.get_kata_description(kata.kata_id)
-    kata_name = api.get_kata_name(kata.kata_id)
+    kata_info = api.get_kata_name_and_description(kata.kata_id)
+    kata_name = kata_info[0]
+    kata_description = kata_info[1]
 	
     for language, source_code in zip(kata.languages, kata.source_codes):
         file_dir = os.path.join(base_dir, kata.difficulty, trimPath(kata.title), language)
@@ -39,5 +40,5 @@ for i, kata in enumerate(katas):
             fout.write(source_code)
 
         with open(os.path.join(file_dir, 'README.md'), 'w', encoding="utf-8") as fout:
-            fout.write(f"# [{kata_name}](https://www.codewars.com/kata/{kata.kata_id})\n___\n")
+            fout.write(f"# [{kata_name}](https://www.codewars.com/kata/{kata.kata_id})\n\n")
             fout.write(kata_description)
