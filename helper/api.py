@@ -12,8 +12,8 @@ class CodeWarsApi:
         data = json.loads(res.text)
         return data['name'], data['description']
 
-    def get_user_totalCompleted(self, user_name):
-        endpoint = 'https://www.codewars.com/api/v1/users/{}'.format(user_name)
+    def get_user_total_completed(self, user_name, page_number):
+        endpoint = 'https://www.codewars.com/api/v1/users/{}/code-challenges/completed?page={}'.format(user_name, page_number)
         res = requests.get(endpoint, params={'Authorization': self.token})
         data = json.loads(res.text)
-        return data['codeChallenges']['totalCompleted']	
+        return data

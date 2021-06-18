@@ -24,7 +24,16 @@ driver.find_element_by_xpath("//div[@class='profile-pic mr-0']/img[1]").click()
 
 user_name = driver.current_url.split("/")[-1]
 api = CodeWarsApi(setup['codewars']['api_key'])
-completed_katas = api.get_user_totalCompleted(user_name)
+
+completed_katas = 0
+total_pages = 1
+current_page = 0
+while current_page < total_pages:
+  data = api.get_user_total_completed(user_name, current_page)
+  total_pages = data['totalPages']
+  current_page += 1
+  for i in data['data']:
+      completed_katas+=len(i['completedLanguages'])
 
 WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.LINK_TEXT, "Solutions")))
 driver.find_element_by_link_text('Solutions').click()
